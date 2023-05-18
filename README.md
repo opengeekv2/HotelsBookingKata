@@ -5,5 +5,5 @@
 - [ ] Install ASP.core
 - [ ] Finalize Docker
 - [ ] Finalize Terraform
-- [ ] Infraestructure in Azure
+- [ ] infrastructure in Azure
 - [ ] Github Actions
