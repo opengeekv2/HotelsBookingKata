@@ -26,7 +26,7 @@ data "azurerm_subscription" "current" {
 
 resource "azurerm_resource_group" "hotelsbooking" {
   name     = "hotelsbooking"
-  location = "westeurope"
+  location = "northeurope"
 }
 
 resource "azurerm_container_registry" "hotelsbooking_acr" {
@@ -82,7 +82,6 @@ resource "azurerm_linux_web_app" "hotelsbooking_app" {
     DOCKER_REGISTRY_SERVER_URL      = "https://hotelsbooking.azurecr.io"
     DOCKER_REGISTRY_SERVER_USERNAME = "hotelsbooking"
     WEBSITES_PORT = 3000
-    SECRET_KEY_BASE                 = "${var.secret_key_base}"
   }
 
   depends_on = [
