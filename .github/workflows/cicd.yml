@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         run: |
-          cd HotelsBookingKata
+          cd HotelsBookingKata/Hotels/Infrastructure
           dotnet build --configuration Release --no-restore
           dotnet publish -c Release -o ../hotelsbooking-app -r linux-x64 --self-contained true /p:UseAppHost=true
         

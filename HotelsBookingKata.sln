@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata", "HotelsBookingKata\HotelsBookingKata.csproj", "{8E9605BE-B169-4354-A899-7F8914E60F6B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Infrastructure", "HotelsBookingKata.Hotels.Infrastructure\HotelsBookingKata.Hotels.Infrastructure.csproj", "{B0C6C247-2775-494B-A39F-D390354DE616}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 		{8E9605BE-B169-4354-A899-7F8914E60F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E9605BE-B169-4354-A899-7F8914E60F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E9605BE-B169-4354-A899-7F8914E60F6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C6C247-2775-494B-A39F-D390354DE616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C6C247-2775-494B-A39F-D390354DE616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C6C247-2775-494B-A39F-D390354DE616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C6C247-2775-494B-A39F-D390354DE616}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
