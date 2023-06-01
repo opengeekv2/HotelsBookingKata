@@ -1,20 +1,24 @@
-﻿namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
+﻿using TechTalk.SpecFlow.UnitTestProvider;
+
+namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
 
 [Binding]
 public sealed class CalculatorStepDefinitions
 {
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-
+    private readonly IUnitTestRuntimeProvider _unitTestRuntimeProvider;
     private readonly ScenarioContext _scenarioContext;
 
-    public CalculatorStepDefinitions(ScenarioContext scenarioContext)
+    public CalculatorStepDefinitions(IUnitTestRuntimeProvider unitTestRuntimeProvider, ScenarioContext scenarioContext)
     {
+        _unitTestRuntimeProvider = unitTestRuntimeProvider;
         _scenarioContext = scenarioContext;
     }
 
     [Given("the first number is (.*)")]
     public void GivenTheFirstNumberIs(int number)
     {
+        _unitTestRuntimeProvider.TestIgnore("This scenario is always skipped");
         var class1 = Class1.Hallo();
     }
 
@@ -26,7 +30,7 @@ public sealed class CalculatorStepDefinitions
         // To use the multiline text or the table argument of the scenario,
         // additional string/Table parameters can be defined on the step definition
         // method. 
-
+        _unitTestRuntimeProvider.TestIgnore("This scenario is always skipped");
         _scenarioContext.Pending();
     }
 
@@ -34,7 +38,7 @@ public sealed class CalculatorStepDefinitions
     public void WhenTheTwoNumbersAreAdded()
     {
         //TODO: implement act (action) logic
-
+        _unitTestRuntimeProvider.TestIgnore("This scenario is always skipped");
         _scenarioContext.Pending();
     }
 
@@ -42,7 +46,7 @@ public sealed class CalculatorStepDefinitions
     public void ThenTheResultShouldBe(int result)
     {
         //TODO: implement assert (verification) logic
-
+        _unitTestRuntimeProvider.TestIgnore("This scenario is always skipped");
         _scenarioContext.Pending();
     }
 }
