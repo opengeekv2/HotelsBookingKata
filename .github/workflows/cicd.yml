@@ -35,7 +35,7 @@ jobs:
         run: |
           cd HotelsBookingKata
           dotnet build --configuration Release --no-restore
-          dotnet publish -c Release -o ../dotnet-webapp -r linux-x64 --self-contained true /p:UseAppHost=true
+          dotnet publish -c Release -o ../hotelsbooking-app -r linux-x64 --self-contained true /p:UseAppHost=true
         
       - name: Test
         run: dotnet test
@@ -45,4 +45,4 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/dotnet-webapp'
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/hotelsbooking-app'
