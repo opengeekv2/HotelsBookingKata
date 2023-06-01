@@ -9,7 +9,7 @@ on:
       - '**.csproj'
 
 env:
-  AZURE_WEBAPP_NAME: HotelsBookingKata
+  AZURE_WEBAPP_NAME: hotelsbooking-app
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   DOTNET_VERSION: '7.0' # The .NET SDK version to use
 
