@@ -33,9 +33,9 @@ jobs:
 
       - name: Build
         run: |
-          cd HotelsBookingKata/HotelsBookingKata/Hotels/Infrastructure
+          cd HotelsBookingKata.Hotels.Infrastructure
           dotnet build --configuration Release --no-restore
-          dotnet publish -c Release -o ../../../../hotelsbooking-app -r linux-x64 --self-contained true /p:UseAppHost=true
+          dotnet publish -c Release -o ../hotelsbooking-app -r linux-x64 --self-contained true /p:UseAppHost=true
         
       - name: Test
         run: dotnet test
