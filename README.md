@@ -1,3 +1,4 @@
+[![Continuous Delivery - build and test](https://github.com/opengeekv2/HotelsBookingKata/actions/workflows/cicd.yml/badge.svg)](https://github.com/opengeekv2/HotelsBookingKata/actions/workflows/cicd.yml)
 # HotelsBookingKata
 
 ## To-do Skeleton
