@@ -78,10 +78,8 @@ resource "azurerm_linux_web_app" "hotelsbooking_app" {
   }
 
   app_settings = {
-    DOCKER_REGISTRY_SERVER_PASSWORD = azurerm_container_registry.hotelsbooking_acr.admin_password
-    DOCKER_REGISTRY_SERVER_URL      = "https://hotelsbooking.azurecr.io"
-    DOCKER_REGISTRY_SERVER_USERNAME = "hotelsbooking"
-    WEBSITES_PORT = 3000
+    current_stack = "dotnet"
+    dotnet_version = "7.0"
   }
 
   depends_on = [
