@@ -19,7 +19,7 @@ public sealed class CalculatorStepDefinitions
     public void GivenTheFirstNumberIs(int number)
     {
         _unitTestRuntimeProvider.TestIgnore("This scenario is always skipped");
-        var class1 = Class1.Hallo();
+        var class1 = Class1.Hallo;
     }
 
     [Given("the second number is (.*)")]
