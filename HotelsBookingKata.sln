@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Do
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Domain.Tests", "HotelsBookingKata.Hotels.Domain.Tests\HotelsBookingKata.Hotels.Domain.Tests.csproj", "{1B474487-CB6C-4B3B-9393-01881F8DF768}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Domain.Specs", "HotelsBookingKata.Hotels.Domain.Specs\HotelsBookingKata.Hotels.Domain.Specs.csproj", "{98849974-BB78-45AF-9A59-3DAEAE2BA87E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Specs", "HotelsBookingKata.Specs\HotelsBookingKata.Specs.csproj", "{98849974-BB78-45AF-9A59-3DAEAE2BA87E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata", "HotelsBookingKata\HotelsBookingKata.csproj", "{8E9605BE-B169-4354-A899-7F8914E60F6B}"
 EndProject

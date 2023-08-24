@@ -1,13 +1,27 @@
 [![Continuous Delivery - build and test](https://github.com/opengeekv2/HotelsBookingKata/actions/workflows/cicd.yml/badge.svg)](https://github.com/opengeekv2/HotelsBookingKata/actions/workflows/cicd.yml)
 # HotelsBookingKata
 
+# Learngin goals
+- [] .NET Stack
+- [] Walking Skeleton
+- [] Screaming / Clean / Ports & Adapters Architecture
+- [] Outisde-In
+- [] BDD / TDD / DDD
+- [] API Design
+- [] Microservices
+
 ## To-do Skeleton
-- [X] Update core framwork to 7
-- [ ] Install ASP.core
-- [ ] Finalize Docker
-- [ ] Finalize Terraform
-- [ ] infrastructure in Azure
-- [ ] Github Actions
+- [X] Update core framework to 7
+- [X] Install ASP.core
+- [X] Finalize Docker
+- [X] Finalize Terraform
+- [X] infrastructure in Azure
+- [X] Github Actions
+
+## To-Do
+- [] Flow with No policies
+- [] Flow with Company policy
+- [] Flow with Employee policy
 
 
 # Documentation

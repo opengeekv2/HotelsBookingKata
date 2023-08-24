@@ -7,7 +7,7 @@ public class UnitTest1
     [Fact]
     public void Test1()
     {
-        var result = Class1.Hallo();
+        var result = Class1.Hallo;
         result.Should().BeTrue();
     }
 }

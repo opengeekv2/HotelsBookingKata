@@ -5,5 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="9.8.0.76515" PrivateAssets="all" Condition="$(MSBuildProjectExtension) == '.csproj'" />
+    </ItemGroup>
 
 </Project>
