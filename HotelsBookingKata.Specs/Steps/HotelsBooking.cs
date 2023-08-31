@@ -1,9 +1,12 @@
-﻿namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
+﻿using HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
+
+namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
 
 [Binding]
 public sealed class HotelsBooking
 {
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
+    private readonly HttpClient client;
 
     private readonly ScenarioContext _scenarioContext;
 
@@ -14,9 +17,11 @@ public sealed class HotelsBooking
 
 
     [Given(@"an hotel with id ""(.*)"" and name ""(.*)""")]
-    public void GivenAnHotelWithIdAndName(string p0, string p1)
+    public void GivenAnHotelWithIdAndName(string hotelId, string hotelName)
     {
-        ScenarioContext.StepIsPending();
+        var hotelRepository = new HotelRepository();
+        var hotelService = new HotelService(hotelRepository);
+        hotelService.AddHotel(hotelId, hotelName);
     }
 
     [Given(@"a room for hotel with ""(.*)"", number (.*) and room type ""(.*)""")]
