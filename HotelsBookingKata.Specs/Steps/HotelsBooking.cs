@@ -10,24 +10,27 @@ public sealed class HotelsBooking
 
     private readonly ScenarioContext _scenarioContext;
 
+    private readonly IHotelRepository _hotelRepository;
+
     public HotelsBooking(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
+        _hotelRepository = new HotelRepository();
     }
 
 
     [Given(@"an hotel with id ""(.*)"" and name ""(.*)""")]
     public void GivenAnHotelWithIdAndName(string hotelId, string hotelName)
     {
-        var hotelRepository = new HotelRepository();
-        var hotelService = new HotelService(hotelRepository);
+        var hotelService = new HotelService(_hotelRepository);
         hotelService.AddHotel(hotelId, hotelName);
     }
 
-    [Given(@"a room for hotel with ""(.*)"", number (.*) and room type ""(.*)""")]
-    public void GivenARoomForHotelWithNumberAndRoomType(string p0, int p1, string @double)
+    [Given(@"a room for hotel with id ""(.*)"", number (.*) and room type ""(.*)""")]
+    public void GivenARoomForHotelWithNumberAndRoomType(string hotelId, int roomNumber, string roomType)
     {
-        ScenarioContext.StepIsPending();
+        var hotelService = new HotelService(_hotelRepository);
+        hotelService.SetRoom(hotelId, roomNumber, roomType);
     }
 
     [Given(@"an employee of company ""(.*)"", and employee id ""(.*)""")]

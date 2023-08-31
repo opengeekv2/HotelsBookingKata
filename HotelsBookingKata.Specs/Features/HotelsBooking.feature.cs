@@ -80,16 +80,16 @@ namespace HotelsBookingKata.Hotels.Domain.Sepcs.Features
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="No company or employee rules")]
+        [Xunit.SkippableFactAttribute(DisplayName="Booking without company or employee rules")]
         [Xunit.TraitAttribute("FeatureTitle", "HotelsBooking")]
-        [Xunit.TraitAttribute("Description", "No company or employee rules")]
+        [Xunit.TraitAttribute("Description", "Booking without company or employee rules")]
         [Xunit.TraitAttribute("Category", "mytag")]
-        public virtual void NoCompanyOrEmployeeRules()
+        public virtual void BookingWithoutCompanyOrEmployeeRules()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("No company or employee rules", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Booking without company or employee rules", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -114,7 +114,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("an hotel with id \"37750641M\" and name \"Hotel 1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.And("a room for hotel with \"37750641M\", number 101 and room type \"Double\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a room for hotel with id \"37750641M\", number 101 and room type \"Double\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 8
  testRunner.And("an employee of company \"59500657W\", and employee id \"95080440G\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");

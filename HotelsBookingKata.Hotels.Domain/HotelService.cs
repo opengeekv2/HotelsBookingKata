@@ -16,6 +16,12 @@ public class HotelService : IHotelService
 
     public void AddHotel(string hotelId, string hotelName)
     {
-        hotelRepository.AddHotel(hotelId, hotelName);
+        var hotel = new Hotel(hotelId, hotelName);
+        hotelRepository.AddHotel(hotel);
+    }
+
+    public void SetRoom(string hotelId, int roomNumber, string roomType)
+    {
+        throw new NotImplementedException();
     }
 }

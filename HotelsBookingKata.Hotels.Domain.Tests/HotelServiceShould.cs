@@ -13,6 +13,6 @@ public class HotelServiceShould
         
         hotelService.AddHotel("37750641M", "Hotel 1");
         
-        hotelRepository.Verify(_ => _.AddHotel("37750641M", "Hotel 1"), Times.Once);
+        hotelRepository.Verify(_ => _.AddHotel(new Hotel("37750641M", "Hotel 1")), Times.Once);
     }
 }
