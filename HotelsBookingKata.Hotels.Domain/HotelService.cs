@@ -22,6 +22,8 @@ public class HotelService : IHotelService
 
     public void SetRoom(string hotelId, int roomNumber, string roomType)
     {
-        throw new NotImplementedException();
+        var hotel = hotelRepository.GetHotel(hotelId);
+        hotel.Rooms.Add(new Room(roomNumber, roomType));
+        hotelRepository.SaveHotel(hotel);
     }
 }
