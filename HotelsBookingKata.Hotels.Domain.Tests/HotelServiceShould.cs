@@ -8,11 +8,16 @@ public class HotelServiceShould
     [Fact]
     public void AddAnHotel()
     {
+        const string hotelId = "37750641M";
+        const string hotelName = "Hotel 1";
         Mock<IHotelRepository> hotelRepository = new (); 
         var hotelService = new HotelService(hotelRepository.Object);
+        hotelRepository.Setup(_ => _.AddHotel(It.Is<Hotel>(actualHotel =>
+            actualHotel.Id == hotelId && actualHotel.Name == hotelName
+        ))).Verifiable();
         
-        hotelService.AddHotel("37750641M", "Hotel 1");
-        
-        hotelRepository.Verify(_ => _.AddHotel(new Hotel("37750641M", "Hotel 1")), Times.Once);
+        hotelService.AddHotel(hotelId, hotelName);
+
+        hotelRepository.Verify();
     }
 }

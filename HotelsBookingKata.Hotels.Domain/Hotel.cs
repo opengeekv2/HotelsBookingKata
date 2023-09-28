@@ -2,12 +2,12 @@
 
 public class Hotel
 {
-    private readonly string _id;
-    private readonly string _name;
+    public string Id { get; }
+    public string Name { get; }
 
     public Hotel(string id, string name)
     {
-        _id = id;
-        _name = name;
+        Id = id;
+        Name = name;
     }
 }
