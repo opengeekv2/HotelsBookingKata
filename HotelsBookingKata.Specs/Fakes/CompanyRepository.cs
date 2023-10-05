@@ -8,4 +8,9 @@ public class CompanyRepository : ICompanyRepository
     {
         
     }
+
+    public Company.Domain.Company GetCompany(string companyId)
+    {
+        throw new NotImplementedException();
+    }
 }

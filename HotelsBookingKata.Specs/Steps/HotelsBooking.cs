@@ -14,12 +14,15 @@ public sealed class HotelsBooking
     private readonly IHotelRepository _hotelRepository;
     
     private readonly ICompanyRepository _companyRepository;
+    
+    private readonly IEmployeeRepository _employeeRepository;
 
     public HotelsBooking(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
         _hotelRepository = new HotelRepository();
         _companyRepository = new CompanyRepository();
+        _employeeRepository = new EmployeeRepository();
     }
 
 
@@ -40,7 +43,7 @@ public sealed class HotelsBooking
     [Given(@"an employee of company ""(.*)"", and employee id ""(.*)""")]
     public void GivenAnEmployeeOfCompanyAndEmployeeId(string companyId, string employeeId)
     {
-        var companyService = new CompanyService(_companyRepository);
+        var companyService = new CompanyService(_companyRepository, _employeeRepository);
         companyService.AddCompany(companyId);
         companyService.AddEmployee(companyId, employeeId);
     }

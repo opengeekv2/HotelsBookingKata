@@ -3,10 +3,13 @@
 public class CompanyService
 {
     private readonly ICompanyRepository companyRepository;
+    private readonly IEmployeeRepository employeeRepository;
 
-    public CompanyService(ICompanyRepository companyRepositoryObject)
+
+    public CompanyService(ICompanyRepository companyRepositoryObject, IEmployeeRepository employeeRepositoryObject)
     {
         companyRepository = companyRepositoryObject;
+        employeeRepository = employeeRepositoryObject;
     }
     
     public void AddEmployee(string companyId, string employeeId)
