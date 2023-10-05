@@ -1,4 +1,5 @@
-﻿using HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
+﻿using HotelsBookingKata.Company.Domain;
+using HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
 
 namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
 
@@ -11,11 +12,14 @@ public sealed class HotelsBooking
     private readonly ScenarioContext _scenarioContext;
 
     private readonly IHotelRepository _hotelRepository;
+    
+    private readonly ICompanyRepository _companyRepository;
 
     public HotelsBooking(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
         _hotelRepository = new HotelRepository();
+        _companyRepository = new CompanyRepository();
     }
 
 
@@ -34,9 +38,11 @@ public sealed class HotelsBooking
     }
 
     [Given(@"an employee of company ""(.*)"", and employee id ""(.*)""")]
-    public void GivenAnEmployeeOfCompanyAndEmployeeId(string p0, string p1)
+    public void GivenAnEmployeeOfCompanyAndEmployeeId(string companyId, string employeeId)
     {
-        ScenarioContext.StepIsPending();
+        var companyService = new CompanyService(_companyRepository);
+        companyService.AddCompany(companyId);
+        companyService.AddEmployee(companyId, employeeId);
     }
 
     [When(@"the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
