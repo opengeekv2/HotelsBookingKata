@@ -1,16 +1,17 @@
 using HotelsBookingKata.Company.Domain;
 
-namespace HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
-
+namespace HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 public class CompanyRepository : ICompanyRepository
 {
-    public void AddCompany(Company.Domain.Company companyId)
+    private readonly List<Company.Domain.Company> _companies = new ();
+
+    public void Add(Company.Domain.Company company)
     {
-        
+        _companies.Add(company);
     }
 
-    public Company.Domain.Company GetCompany(string companyId)
+    public Company.Domain.Company? GetCompany(string id)
     {
-        throw new NotImplementedException();
+        return _companies.Find(company => company.Id == id);
     }
 }

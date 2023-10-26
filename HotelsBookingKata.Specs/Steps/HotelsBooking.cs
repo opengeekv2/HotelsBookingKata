@@ -1,5 +1,5 @@
 ﻿using HotelsBookingKata.Company.Domain;
-using HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
+using HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 
 namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
 

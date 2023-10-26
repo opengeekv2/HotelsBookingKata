@@ -1,19 +1,19 @@
-namespace HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
+namespace HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 
 public class HotelRepository : IHotelRepository
 {
     private readonly List<Hotel> _hotels = new ();
-    public void AddHotel(Hotel hotel)
+    public void Add(Hotel hotel)
     {
         _hotels.Add(hotel);
     }
 
-    public Hotel? GetHotel(string id)
+    public Hotel? Get(string id)
     {
         return _hotels.Find(hotel => hotel.Id == id);
     }
 
-    public void SaveHotel(Hotel hotel)
+    public void Save(Hotel hotel)
     {
         _hotels.Remove(hotel);
         _hotels.Add(hotel);

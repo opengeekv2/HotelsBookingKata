@@ -17,13 +17,13 @@ public class HotelService : IHotelService
     public void AddHotel(string hotelId, string hotelName)
     {
         var hotel = new Hotel(hotelId, hotelName);
-        hotelRepository.AddHotel(hotel);
+        hotelRepository.Add(hotel);
     }
 
     public void SetRoom(string hotelId, int roomNumber, string roomType)
     {
-        var hotel = hotelRepository.GetHotel(hotelId);
+        var hotel = hotelRepository.Get(hotelId);
         hotel.Rooms.Add(new Room(roomNumber, roomType));
-        hotelRepository.SaveHotel(hotel);
+        hotelRepository.Save(hotel);
     }
 }

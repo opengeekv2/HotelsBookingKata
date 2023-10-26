@@ -14,12 +14,14 @@ public class CompanyService
     
     public void AddEmployee(string companyId, string employeeId)
     {
-        throw new NotImplementedException();
+        var company = companyRepository.GetCompany(companyId);
+        var employee = new Employee(employeeId, company);
+        employeeRepository.Add(employee);
     }
 
     public void AddCompany(string companyId)
     {
         var company = new Company(companyId);
-        companyRepository.AddCompany(company);
+        companyRepository.Add(company);
     }
 }

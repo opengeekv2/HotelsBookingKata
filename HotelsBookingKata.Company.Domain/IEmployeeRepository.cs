@@ -2,5 +2,5 @@ namespace HotelsBookingKata.Company.Domain;
 
 public interface IEmployeeRepository
 {
-    public void AddEmployee(Employee employee);
+    public void Add(Employee employee);
 }

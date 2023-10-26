@@ -12,7 +12,7 @@ public class HotelServiceShould
         const string hotelName = "Hotel 1";
         Mock<IHotelRepository> hotelRepository = new (); 
         var hotelService = new HotelService(hotelRepository.Object);
-        hotelRepository.Setup(_ => _.AddHotel(It.Is<Hotel>(actualHotel =>
+        hotelRepository.Setup(_ => _.Add(It.Is<Hotel>(actualHotel =>
             actualHotel.Id == hotelId && actualHotel.Name == hotelName
         ))).Verifiable();
         
@@ -30,8 +30,8 @@ public class HotelServiceShould
         const string roomType = "Double";
         Mock<IHotelRepository> hotelRepository = new (); 
         var hotelService = new HotelService(hotelRepository.Object);
-        hotelRepository.Setup(_ => _.GetHotel(hotelId)).Returns(new Hotel(hotelId, hotelName));
-        hotelRepository.Setup(_ => _.SaveHotel(It.Is<Hotel>(actualHotel =>
+        hotelRepository.Setup(_ => _.Get(hotelId)).Returns(new Hotel(hotelId, hotelName));
+        hotelRepository.Setup(_ => _.Save(It.Is<Hotel>(actualHotel =>
             actualHotel.Rooms.Any() && actualHotel.Rooms[0].Number == roomNumber && actualHotel.Rooms[0].Type == roomType
         ))).Verifiable();
         

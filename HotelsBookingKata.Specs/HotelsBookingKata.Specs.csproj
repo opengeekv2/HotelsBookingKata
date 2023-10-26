@@ -4,7 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>HotelsBookingKata.Hotels.Domain.Sepcs</RootNamespace>
+        <RootNamespace>HotelsBookingKata.Hotels.Domain.Specs</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

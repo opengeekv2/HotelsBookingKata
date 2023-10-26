@@ -1,10 +1,10 @@
 using HotelsBookingKata.Company.Domain;
 
-namespace HotelsBookingKata.Hotels.Domain.Sepcs.Fakes;
+namespace HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 
 public class EmployeeRepository : IEmployeeRepository
 {
-    public void AddEmployee(Company.Domain.Employee employee)
+    public void Add(Employee employee)
     {
         
     }

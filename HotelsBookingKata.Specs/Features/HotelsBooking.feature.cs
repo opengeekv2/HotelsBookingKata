@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace HotelsBookingKata.Hotels.Domain.Sepcs.Features
+namespace HotelsBookingKata.Hotels.Domain.Specs.Features
 {
     using TechTalk.SpecFlow;
     using System;
@@ -31,7 +31,7 @@ namespace HotelsBookingKata.Hotels.Domain.Sepcs.Features
 #line 1 "HotelsBooking.feature"
 #line hidden
         
-        public HotelsBookingFeature(HotelsBookingFeature.FixtureData fixtureData, HotelsBookingKata_Hotels_Domain_Sepcs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public HotelsBookingFeature(HotelsBookingFeature.FixtureData fixtureData, HotelsBookingKata_Hotels_Domain_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
