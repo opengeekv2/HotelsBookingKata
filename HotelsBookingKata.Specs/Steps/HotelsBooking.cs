@@ -1,4 +1,5 @@
-﻿using HotelsBookingKata.Company.Domain;
+﻿using HotelsBookingKata.Book.Domain;
+using HotelsBookingKata.Company.Domain;
 using HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 
 namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
@@ -49,9 +50,10 @@ public sealed class HotelsBooking
     }
 
     [When(@"the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
-    public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(string p0, string @double, string p2, string p3, string p4)
+    public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string checkIn, string checkOut)
     {
-        ScenarioContext.StepIsPending();
+        var bookingService = new BookingService();
+        bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut);
     }
 
     [Then(@"the result should complete a booking and return confirmation for the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]

@@ -25,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\HotelsBookingKata.Book.Domain\HotelsBookingKata.Book.Domain.csproj" />
         <ProjectReference Include="..\HotelsBookingKata.Company.Domain\HotelsBookingKata.Company.Domain.csproj" />
         <ProjectReference Include="..\HotelsBookingKata.Hotels.Domain\HotelsBookingKata.Hotels.Domain.csproj" />
     </ItemGroup>
