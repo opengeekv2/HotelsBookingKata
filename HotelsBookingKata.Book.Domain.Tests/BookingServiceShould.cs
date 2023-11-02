@@ -10,9 +10,14 @@ public class BookingServiceShould
     public void CreateBookingShouldContainAUniqueId()
     {
         Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
-        uniqueIdGenerator.Setup(_ => _.Generate()).Returns("efeb449a-793a-4b30-9291-1f89f571d4d6");
-        BookingService bookingService = new BookingService();
+        const string expectedId = "efeb449a-793a-4b30-9291-1f89f571d4d6";
+        uniqueIdGenerator.Setup(_ => _.Generate()).Returns(expectedId);
+        BookingService bookingService = new BookingService(uniqueIdGenerator.Object);
+        
         var booking = bookingService.Book("95080440G", "Double", "37750641M", "25-5-2024", "27-5-2024");
-        Assert.Equal("efeb449a-793a-4b30-9291-1f89f571d4d6", booking.Id);
+        
+        uniqueIdGenerator.Verify(_ =>_.Generate(), Times.Once);
+        Assert.Equal(expectedId, booking.Id);
     }
+    
 }

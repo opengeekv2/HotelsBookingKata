@@ -50,8 +50,10 @@ public sealed class HotelsBooking
     [When(@"the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
     public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string checkIn, string checkOut)
     {
-        var bookingService = new BookingService();
+        var uniqueIdGenerator = new UniqueIdGenerator();
+        var bookingService = new BookingService(uniqueIdGenerator);
         bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut);
+        ScenarioContext.StepIsPending();
     }
 
     [Then(@"the result should complete a booking and return confirmation for the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
