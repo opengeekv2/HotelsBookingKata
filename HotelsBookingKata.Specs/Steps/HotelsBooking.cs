@@ -8,8 +8,6 @@ namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
 public sealed class HotelsBooking
 {
     // For additional details on SpecFlow step definitions see https://go.specflow.org/doc-stepdef
-    private readonly HttpClient client;
-
     private readonly ScenarioContext _scenarioContext;
 
     private readonly IHotelRepository _hotelRepository;
@@ -57,7 +55,7 @@ public sealed class HotelsBooking
     }
 
     [Then(@"the result should complete a booking and return confirmation for the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
-    public void ThenTheResultShouldCompleteABookingAndReturnConfirmationForTheEmployeeBooksTheRoomTypeOnHotelFromTo(string p0, string @double, string p2, string p3, string p4)
+    public void ThenTheResultShouldCompleteABookingAndReturnConfirmationForTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string startDate, string endDate)
     {
         ScenarioContext.StepIsPending();
     }

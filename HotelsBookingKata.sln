@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Company.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Book.Domain", "HotelsBookingKata.Book.Domain\HotelsBookingKata.Book.Domain.csproj", "{26E65B64-C579-4E23-8A4D-77633826FC85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Book.Domain.Tests", "HotelsBookingKata.Book.Domain.Tests\HotelsBookingKata.Book.Domain.Tests.csproj", "{8BDF9C49-A405-451F-8093-5A10CAF05228}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,5 +66,9 @@ Global
 		{26E65B64-C579-4E23-8A4D-77633826FC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26E65B64-C579-4E23-8A4D-77633826FC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26E65B64-C579-4E23-8A4D-77633826FC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
