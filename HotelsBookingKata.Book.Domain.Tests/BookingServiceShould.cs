@@ -65,7 +65,7 @@ public class BookingServiceShould
         BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, policyService.Object);
         
         var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);
-        bookingResultDto.Should().BeOfType<HotelDoesNotHaveRoomTypeDto>();
+        bookingResultDto.Should().BeOfType<RoomTypeIsNotAllowedDto>();
         bookingDto.Should().BeNull();
     }
 }

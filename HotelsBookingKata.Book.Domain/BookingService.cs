@@ -8,6 +8,7 @@ public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService 
         bookingDto = null;
         if (checkIn >= checkOut) return new CheckOutDateIsNotLaterThanCheckInDto();
         if (!hotelService.ExistsRoomTypeInHotel(hotelId, roomType)) return new HotelDoesNotHaveRoomTypeDto();
+        if (!policyService.IsBookingAllowed(employeeId, roomType)) return new RoomTypeIsNotAllowedDto();
         bookingDto = new BookingDto(uniqueIdGenerator.Generate(), employeeId, hotelId, roomType, checkIn, checkOut);
         return new BookingSuccessfulDto();
     }
@@ -20,3 +21,5 @@ public class BookingSuccessfulDto() : BookingOperationResultDto("Booking was suc
 public class CheckOutDateIsNotLaterThanCheckInDto() : BookingOperationResultDto("Booking unsuccessful because checkout date is later than check in");
 
 public class HotelDoesNotHaveRoomTypeDto() : BookingOperationResultDto("Hotel does not have room type");
+
+public class RoomTypeIsNotAllowedDto() : BookingOperationResultDto("Room type is not allowed");
