@@ -1,6 +1,4 @@
-﻿using Jane;
-
-namespace HotelsBookingKata.Book.Domain;
+﻿namespace HotelsBookingKata.Book.Domain;
 
 public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService hotelService, IPolicyService policyService)
 {
