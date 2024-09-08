@@ -1,4 +1,5 @@
-﻿using HotelsBookingKata.Book.Domain;
+﻿using FluentAssertions;
+using HotelsBookingKata.Book.Domain;
 using HotelsBookingKata.Company.Domain;
 using HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 
@@ -15,6 +16,10 @@ public sealed class HotelsBooking
     private readonly ICompanyRepository _companyRepository;
     
     private readonly IEmployeeRepository _employeeRepository;
+    
+    private BookingOperationResultDto _bookingOperationResultDto;
+    
+    private BookingDto? _bookingDto;
 
     public HotelsBooking(ScenarioContext scenarioContext)
     {
@@ -48,17 +53,19 @@ public sealed class HotelsBooking
     }
 
     [When(@"the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
-    public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string checkIn, string checkOut)
+    public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId,
+        DateTime checkIn, DateTime checkOut)
     {
         var uniqueIdGenerator = new UniqueIdGenerator();
-        var bookingService = new BookingService(uniqueIdGenerator);
-        bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut);
-        ScenarioContext.StepIsPending();
+        var bookingService = new BookingService(uniqueIdGenerator, new Book.Domain.HotelService(new HotelRepository()), new PolicyService());
+        _bookingOperationResultDto =
+            bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut, out _bookingDto);
     }
 
     [Then(@"the result should complete a booking and return confirmation for the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
     public void ThenTheResultShouldCompleteABookingAndReturnConfirmationForTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string startDate, string endDate)
     {
-        ScenarioContext.StepIsPending();
+        _bookingOperationResultDto.Should().BeOfType<BookingSuccessfulDto>();
+        _bookingDto!.EmployeeId.Should().Be(employeeId);
     }
 }

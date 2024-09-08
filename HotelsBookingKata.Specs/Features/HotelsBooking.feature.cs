@@ -121,12 +121,12 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
 #line 9
  testRunner.When("the employee \"95080440G\" books the room type \"Double\" on hotel \"37750641M\" from \"" +
-                        "25-5-2024\" to \"27-5-2024\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                        "2024-5-26T00:00:00.000Z\" to \"2024-5-27T00:00:00.000Z\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 10
  testRunner.Then("the result should complete a booking and return confirmation for the employee \"95" +
-                        "080440G\" books the room type \"Double\" on hotel \"37750641M\" from \"25-5-2024\" to \"" +
-                        "27-5-2024\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                        "080440G\" books the room type \"Double\" on hotel \"37750641M\" from \"2024-5-26T00:00" +
+                        ":00.000Z\" to \"2024-5-27T00:00:00.000Z\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

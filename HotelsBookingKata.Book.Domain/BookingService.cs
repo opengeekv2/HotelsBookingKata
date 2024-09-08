@@ -1,16 +1,24 @@
-﻿namespace HotelsBookingKata.Book.Domain;
+﻿using Jane;
 
-public class BookingService
+namespace HotelsBookingKata.Book.Domain;
+
+public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService hotelService, IPolicyService policyService)
 {
-    private readonly IUniqueIdGenerator uniqueIdGenerator;
 
-    public BookingService(IUniqueIdGenerator uniqueIdGenerator)
+    public BookingOperationResultDto Book(string employeeId, string hotelId, string roomType, DateTime checkIn, DateTime checkOut, out BookingDto? bookingDto)
     {
-        this.uniqueIdGenerator = uniqueIdGenerator;
-    }
-
-    public Booking Book(string employeeId, string hotelId, string roomType, string checkIn, string checkOut)
-    {
-        return new Booking(uniqueIdGenerator.Generate());
+        bookingDto = null;
+        if (checkIn >= checkOut) return new CheckOutDateIsNotLaterThanCheckInDto();
+        if (!hotelService.ExistsRoomTypeInHotel(hotelId, roomType)) return new HotelDoesNotHaveRoomTypeDto();
+        bookingDto = new BookingDto(uniqueIdGenerator.Generate(), employeeId, hotelId, roomType, checkIn, checkOut);
+        return new BookingSuccessfulDto();
     }
 }
+
+public abstract class BookingOperationResultDto(string Message);
+
+public class BookingSuccessfulDto() : BookingOperationResultDto("Booking was sucessful");
+
+public class CheckOutDateIsNotLaterThanCheckInDto() : BookingOperationResultDto("Booking unsuccessful because checkout date is later than check in");
+
+public class HotelDoesNotHaveRoomTypeDto() : BookingOperationResultDto("Hotel does not have room type");
