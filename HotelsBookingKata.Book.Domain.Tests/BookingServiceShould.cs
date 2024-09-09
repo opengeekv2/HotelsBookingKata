@@ -68,4 +68,20 @@ public class BookingServiceShould
         bookingResultDto.Should().BeOfType<RoomTypeIsNotAllowedDto>();
         bookingDto.Should().BeNull();
     }
+
+    [Fact]
+    public void FailToCreateBookingIfTheresNoFreeRoomOfTheTypeForTheDates()
+    {
+        var inputBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 27));
+        Mock<IHotelService> hotelService = new();
+        hotelService.Setup(hotelService => hotelService.ExistsRoomTypeInHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(true);
+        Mock<IPolicyService> policyService = new();
+        policyService.Setup(policyService => policyService.IsBookingAllowed(inputBookingDto.EmployeeId, inputBookingDto.RoomType)).Returns(false);
+        Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
+        BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, policyService.Object);
+        
+        var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);
+        bookingResultDto.Should().BeOfType<NoFreeRoomDto>();
+        bookingDto.Should().BeNull();
+    }
 }

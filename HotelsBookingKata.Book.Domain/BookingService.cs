@@ -23,3 +23,7 @@ public class CheckOutDateIsNotLaterThanCheckInDto() : BookingOperationResultDto(
 public class HotelDoesNotHaveRoomTypeDto() : BookingOperationResultDto("Hotel does not have room type");
 
 public class RoomTypeIsNotAllowedDto() : BookingOperationResultDto("Room type is not allowed");
+
+public class NoFreeRoomDto() : BookingOperationResultDto("Room type is booked for the hotel for the selected dates");
+
+
