@@ -1,6 +1,6 @@
 ﻿namespace HotelsBookingKata.Book.Domain;
 
-public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService hotelService, IPolicyService policyService)
+public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService hotelService, IBookingRepository bookingRepository)
 {
 
     public BookingOperationResultDto Book(string employeeId, string hotelId, string roomType, DateTime checkIn, DateTime checkOut, out BookingDto? bookingDto)
@@ -8,7 +8,7 @@ public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService 
         bookingDto = null;
         if (checkIn >= checkOut) return new CheckOutDateIsNotLaterThanCheckInDto();
         if (!hotelService.ExistsRoomTypeInHotel(hotelId, roomType)) return new HotelDoesNotHaveRoomTypeDto();
-        if (!policyService.IsBookingAllowed(employeeId, roomType)) return new RoomTypeIsNotAllowedDto();
+        if (bookingRepository.GetAll().Any(x => true))
         bookingDto = new BookingDto(uniqueIdGenerator.Generate(), employeeId, hotelId, roomType, checkIn, checkOut);
         return new BookingSuccessfulDto();
     }

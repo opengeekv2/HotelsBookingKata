@@ -57,7 +57,7 @@ public sealed class HotelsBooking
         DateTime checkIn, DateTime checkOut)
     {
         var uniqueIdGenerator = new UniqueIdGenerator();
-        var bookingService = new BookingService(uniqueIdGenerator, new Book.Domain.HotelService(new HotelRepository()), new PolicyService());
+        var bookingService = new BookingService(uniqueIdGenerator, new Book.Domain.HotelService(new HotelRepository()));
         _bookingOperationResultDto =
             bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut, out _bookingDto);
     }
