@@ -53,16 +53,36 @@ public class BookingServiceShould
         bookingDto.Should().BeNull();
     }
 
-    [Fact]
-    public void FailToCreateBookingIfTheresNoFreeRoomOfTheTypeForTheDates()
+    /*
+     * començar en la data d'inici i acabar en de la data de fi
+       començar abans de la data d'inici i acabar passat la data d'inici
+           començar abans la data de fi i acabar passat la data de fi
+     */
+    public static IEnumerable<object[]> Bookings => new List<object[]>
     {
-        var inputBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 27));
+        new object[] {
+            new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
+                new DateTime(2024, 5, 26), new DateTime(2024, 5, 28)),
+            new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
+                new DateTime(2024, 5, 25), new DateTime(2024, 5, 27)),
+            new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
+                new DateTime(2024, 5, 27), new DateTime(2024, 5, 29))
+        }
+    };
+    
+    [Theory]
+    [MemberData(nameof(Bookings))]
+    public void FailToCreateBookingIfTheresNoFreeRoomOfTheTypeForTheDates(BookingDto inputBookingDto)
+    {
         Mock<IHotelService> hotelService = new();
         hotelService.Setup(hotelService => hotelService.ExistsRoomTypeInHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(true);
         Mock<IPolicyService> policyService = new();
         policyService.Setup(policyService => policyService.IsBookingAllowed(inputBookingDto.EmployeeId, inputBookingDto.RoomType)).Returns(false);
         Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
         Mock<IBookingRepository> bookingRepository = new();
+        bookingRepository.Setup(bookingRepository => bookingRepository.GetAll()).Returns([
+            new Booking("efeb449a-793a-4b30-9291-1f89f571d4d7", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 28))
+        ]);
         BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
         
         var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);

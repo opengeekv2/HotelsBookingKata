@@ -57,7 +57,7 @@ public sealed class HotelsBooking
         DateTime checkIn, DateTime checkOut)
     {
         var uniqueIdGenerator = new UniqueIdGenerator();
-        var bookingService = new BookingService(uniqueIdGenerator, new Book.Domain.HotelService(new HotelRepository()));
+        var bookingService = new BookingService(uniqueIdGenerator, new Book.Domain.HotelService(new HotelRepository()), new BookingRepository());
         _bookingOperationResultDto =
             bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut, out _bookingDto);
     }
@@ -66,6 +66,6 @@ public sealed class HotelsBooking
     public void ThenTheResultShouldCompleteABookingAndReturnConfirmationForTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string startDate, string endDate)
     {
         _bookingOperationResultDto.Should().BeOfType<BookingSuccessfulDto>();
-        _bookingDto!.EmployeeId.Should().Be(employeeId);
+        _bookingDto.EmployeeId.Should().Be(employeeId);
     }
 }

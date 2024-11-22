@@ -1,5 +1,3 @@
 namespace HotelsBookingKata.Book.Domain;
 
-public class Booking
-{
-}
+public record Booking(string Id, string EmployeeId, string HotelId, string RoomType, DateTime CheckIn, DateTime CheckOut);
