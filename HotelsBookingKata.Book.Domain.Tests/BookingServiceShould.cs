@@ -39,11 +39,11 @@ public class BookingServiceShould
     }
     
     [Fact]
-    public void FailToCreateBookingIfTheHotelDoesNotHAveTheRoomType()
+    public void FailToCreateBookingIfTheHotelDoesNotHaveTheRoomType()
     {
         var inputBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 27));
         Mock<IHotelService> hotelService = new();
-        hotelService.Setup(hotelService => hotelService.ExistsRoomTypeInHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(false);
+        hotelService.Setup(hotelService => hotelService.GetNumberOfRoomsByTypeAndHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(0);
         Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
         Mock<IBookingRepository> bookingRepository = new();
         BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
@@ -62,11 +62,16 @@ public class BookingServiceShould
     {
         new object[] {
             new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
-                new DateTime(2024, 5, 26), new DateTime(2024, 5, 28)),
+                new DateTime(2024, 5, 26), new DateTime(2024, 5, 29)) },
+        new object[] {
             new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
-                new DateTime(2024, 5, 25), new DateTime(2024, 5, 27)),
+        new DateTime(2024, 5, 27), new DateTime(2024, 5, 28)) },
+        new object[] {
             new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
-                new DateTime(2024, 5, 27), new DateTime(2024, 5, 29))
+                new DateTime(2024, 5, 25), new DateTime(2024, 5, 27)) },
+        new object[] {
+            new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
+                new DateTime(2024, 5, 28), new DateTime(2024, 5, 30))
         }
     };
     
@@ -75,13 +80,13 @@ public class BookingServiceShould
     public void FailToCreateBookingIfTheresNoFreeRoomOfTheTypeForTheDates(BookingDto inputBookingDto)
     {
         Mock<IHotelService> hotelService = new();
-        hotelService.Setup(hotelService => hotelService.ExistsRoomTypeInHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(true);
+        hotelService.Setup(hotelService => hotelService.GetNumberOfRoomsByTypeAndHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(1);
         Mock<IPolicyService> policyService = new();
         policyService.Setup(policyService => policyService.IsBookingAllowed(inputBookingDto.EmployeeId, inputBookingDto.RoomType)).Returns(false);
         Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
         Mock<IBookingRepository> bookingRepository = new();
         bookingRepository.Setup(bookingRepository => bookingRepository.GetAll()).Returns([
-            new Booking("efeb449a-793a-4b30-9291-1f89f571d4d7", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 28))
+            new Booking("efeb449a-793a-4b30-9291-1f89f571d4d7", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 29))
         ]);
         BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
         

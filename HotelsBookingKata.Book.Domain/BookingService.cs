@@ -7,8 +7,14 @@ public class BookingService(IUniqueIdGenerator uniqueIdGenerator, IHotelService 
     {
         bookingDto = null;
         if (checkIn >= checkOut) return new CheckOutDateIsNotLaterThanCheckInDto();
-        if (!hotelService.ExistsRoomTypeInHotel(hotelId, roomType)) return new HotelDoesNotHaveRoomTypeDto();
-        if (bookingRepository.GetAll().Any(x => true))
+        var roomsInHotel = hotelService.GetNumberOfRoomsByTypeAndHotel(hotelId, roomType);
+        if (roomsInHotel == 0) return new HotelDoesNotHaveRoomTypeDto();
+        if (bookingRepository.GetAll().Count(booking =>
+            {
+                return booking.CheckIn <= checkIn && booking.CheckOut >= checkOut
+                    || booking.CheckIn > checkIn && booking.CheckIn < checkOut
+                    || booking.CheckOut > checkIn && booking.CheckOut <= checkOut;
+            }) == roomsInHotel) return new NoFreeRoomDto();
         bookingDto = new BookingDto(uniqueIdGenerator.Generate(), employeeId, hotelId, roomType, checkIn, checkOut);
         return new BookingSuccessfulDto();
     }

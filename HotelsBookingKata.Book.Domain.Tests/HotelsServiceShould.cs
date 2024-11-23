@@ -22,5 +22,11 @@ public class HotelsServiceShould
         var hotelService = new HotelService(hotelRepository.Object);
         hotelService.ExistsRoomTypeInHotel("hotelid", "Double").Should().BeFalse();
     }
+    
+    [Fact]
+    public void ReturnTheNumberOfExistingRoomOfTheTypeInHotel()
+    {
+        throw new NotImplementedException();
+    }
 
 }
