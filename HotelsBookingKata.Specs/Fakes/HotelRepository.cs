@@ -23,4 +23,9 @@ public class HotelRepository : IHotelRepository, Book.Domain.IHotelRepository
     {
         return true;
     }
+
+    public int GetNumberOfRoomsByTypeAndHotel(string hotelId, string roomType)
+    {
+        return 1;
+    }
 }

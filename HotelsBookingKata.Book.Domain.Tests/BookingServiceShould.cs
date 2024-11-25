@@ -11,7 +11,7 @@ public class BookingServiceShould
     {
         var expectedBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 27));
         Mock<IHotelService> hotelService = new();
-        hotelService.Setup(hotelService => hotelService.ExistsRoomTypeInHotel(expectedBookingDto.HotelId, expectedBookingDto.RoomType)).Returns(true);
+        hotelService.Setup(hotelService => hotelService.GetNumberOfRoomsByTypeAndHotel(expectedBookingDto.HotelId, expectedBookingDto.RoomType)).Returns(1);
         Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
         const string expectedId = "efeb449a-793a-4b30-9291-1f89f571d4d6";
         uniqueIdGenerator.Setup(uniqueIdGenerator => uniqueIdGenerator.Generate()).Returns(expectedId);
@@ -20,8 +20,8 @@ public class BookingServiceShould
         var bookingResultDto = bookingService.Book(expectedBookingDto.EmployeeId, expectedBookingDto.HotelId, expectedBookingDto.RoomType, expectedBookingDto.CheckIn, expectedBookingDto.CheckOut, out var bookingDto);
         
         uniqueIdGenerator.Verify(_ =>_.Generate(), Times.Once);
-        bookingDto.Should().BeEquivalentTo(expectedBookingDto);
         bookingResultDto.Should().BeOfType<BookingSuccessfulDto>();
+        bookingDto.Should().BeEquivalentTo(expectedBookingDto);
     }
     
     [Fact]

@@ -26,7 +26,10 @@ public class HotelsServiceShould
     [Fact]
     public void ReturnTheNumberOfExistingRoomOfTheTypeInHotel()
     {
-        throw new NotImplementedException();
+        Mock<IHotelRepository> hotelRepository = new();
+        hotelRepository.Setup(hotelRepository => hotelRepository.GetNumberOfRoomsByTypeAndHotel("hotelid", "Double")).Returns(1);
+        var hotelService = new HotelService(hotelRepository.Object);
+        hotelService.GetNumberOfRoomsByTypeAndHotel("hotelid", "Double").Should().Be(1);
     }
 
 }

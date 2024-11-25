@@ -16,6 +16,6 @@ public class HotelService(IHotelRepository hotelRepository) : IHotelService
     
     public int GetNumberOfRoomsByTypeAndHotel(string hotelId, string roomType)
     {
-        throw new NotImplementedException();
+        return hotelRepository.GetNumberOfRoomsByTypeAndHotel(hotelId, roomType);
     }
 }
