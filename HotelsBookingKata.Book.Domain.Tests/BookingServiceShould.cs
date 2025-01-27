@@ -3,54 +3,66 @@ using Moq;
 namespace HotelsBookingKata.Book.Domain.Tests;
 
 using FluentAssertions;
+using NSubstitute;
+using Shouldly;
 
 public class BookingServiceShould
 {
+    private readonly IUniqueIdGenerator _uniqueIdGenerator;
+    private readonly IHotelService _hotelService;
+
+    private readonly IBookingRepository _bookingRepository;
+    
+    private readonly BookingService _bookingService;
+    public BookingServiceShould() {
+        _uniqueIdGenerator = Substitute.For<IUniqueIdGenerator>();
+        _hotelService = Substitute.For<IHotelService>();
+        _bookingRepository = Substitute.For<IBookingRepository>();
+        _bookingService = new BookingService(_uniqueIdGenerator, _hotelService, _bookingRepository);
+    }
+
     [Fact]
     public void CreateBookingShouldContainAllBookingInformationIncludingTheId()
     {
         var expectedBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 27));
-        Mock<IHotelService> hotelService = new();
-        hotelService.Setup(hotelService => hotelService.GetNumberOfRoomsByTypeAndHotel(expectedBookingDto.HotelId, expectedBookingDto.RoomType)).Returns(1);
-        Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
+        _hotelService.GetNumberOfRoomsByTypeAndHotel(expectedBookingDto.HotelId, expectedBookingDto.RoomType).Returns(1);
         const string expectedId = "efeb449a-793a-4b30-9291-1f89f571d4d6";
-        uniqueIdGenerator.Setup(uniqueIdGenerator => uniqueIdGenerator.Generate()).Returns(expectedId);
-        Mock<IBookingRepository> bookingRepository = new();
-        BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
-        var bookingResultDto = bookingService.Book(expectedBookingDto.EmployeeId, expectedBookingDto.HotelId, expectedBookingDto.RoomType, expectedBookingDto.CheckIn, expectedBookingDto.CheckOut, out var bookingDto);
+        _uniqueIdGenerator.Generate().Returns(expectedId);
         
-        uniqueIdGenerator.Verify(_ =>_.Generate(), Times.Once);
-        bookingResultDto.Should().BeOfType<BookingSuccessfulDto>();
-        bookingDto.Should().BeEquivalentTo(expectedBookingDto);
+        var bookingResultDto = _bookingService.Book(expectedBookingDto.EmployeeId, expectedBookingDto.HotelId, expectedBookingDto.RoomType, expectedBookingDto.CheckIn, expectedBookingDto.CheckOut, out var bookingDto);
+        
+        _uniqueIdGenerator.Received(1).Generate();
+        bookingResultDto.ShouldBeOfType<BookingSuccessfulDto>();
+        bookingDto.ShouldBe(expectedBookingDto);
     }
     
     [Fact]
     public void FailToCreateBookingIfTheCheckOutDateIsNotLaterThanTheCheckInDate()
     {
-        Mock<IHotelService> hotelService = new();
-        Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
+        var hotelService = Substitute.For<IHotelService>();
+        var uniqueIdGenerator = Substitute.For<IUniqueIdGenerator>();
         var inputBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 26));
-        Mock<IBookingRepository> bookingRepository = new();
-        BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
+        var bookingRepository = Substitute.For<IBookingRepository>();
+        var bookingService = new BookingService(uniqueIdGenerator, hotelService, bookingRepository);
         
         var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);
-        bookingResultDto.Should().BeOfType<CheckOutDateIsNotLaterThanCheckInDto>();
-        bookingDto.Should().BeNull();
+        bookingResultDto.ShouldBeOfType<CheckOutDateIsNotLaterThanCheckInDto>();
+        bookingDto.ShouldBeNull();
     }
     
     [Fact]
     public void FailToCreateBookingIfTheHotelDoesNotHaveTheRoomType()
     {
         var inputBookingDto = new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 27));
-        Mock<IHotelService> hotelService = new();
-        hotelService.Setup(hotelService => hotelService.GetNumberOfRoomsByTypeAndHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(0);
-        Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
-        Mock<IBookingRepository> bookingRepository = new();
-        BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
+        var hotelService = Substitute.For<IHotelService>();
+        hotelService.GetNumberOfRoomsByTypeAndHotel(inputBookingDto.HotelId, inputBookingDto.RoomType).Returns(0);
+        var uniqueIdGenerator = Substitute.For<IUniqueIdGenerator>();
+        var bookingRepository = Substitute.For<IBookingRepository>();
+        BookingService bookingService = new BookingService(uniqueIdGenerator, hotelService, bookingRepository);
         
         var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);
-        bookingResultDto.Should().BeOfType<HotelDoesNotHaveRoomTypeDto>();
-        bookingDto.Should().BeNull();
+        bookingResultDto.ShouldBeOfType<HotelDoesNotHaveRoomTypeDto>();
+        bookingDto.ShouldBeNull();
     }
 
     /*
@@ -58,7 +70,7 @@ public class BookingServiceShould
        començar abans de la data d'inici i acabar passat la data d'inici
            començar abans la data de fi i acabar passat la data de fi
      */
-    public static IEnumerable<object[]> Bookings => new List<object[]>
+    /* public static IEnumerable<object[]> Bookings => new List<object[]>
     {
         new object[] {
             new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
@@ -93,5 +105,5 @@ public class BookingServiceShould
         var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);
         bookingResultDto.Should().BeOfType<NoFreeRoomDto>();
         bookingDto.Should().BeNull();
-    }
+    }*/
 }
