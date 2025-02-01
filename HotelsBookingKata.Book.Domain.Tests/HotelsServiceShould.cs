@@ -1,35 +1,39 @@
-using FluentAssertions;
-using Moq;
+using NSubstitute;
+using Shouldly;
 
 namespace HotelsBookingKata.Book.Domain.Tests;
 
-public class HotelsServiceShould
+public class HotelServiceShould
 {
+    private readonly HotelService _hotelService;
+    
+    private readonly IHotelRepository _hotelRepository;
+
+    public HotelServiceShould() {
+        _hotelRepository = Substitute.For<IHotelRepository>();
+        _hotelService = new HotelService(_hotelRepository);
+    }
+    
     [Fact]
     public void ReturnTrueIfExistsRoomTypeInHotel()
     {
-        Mock<IHotelRepository> hotelRepository = new();
-        hotelRepository.Setup(hotelRepository => hotelRepository.ExistsRoomTypeInHotel("hotelid", "Double")).Returns(true);
-        var hotelService = new HotelService(hotelRepository.Object);
-        hotelService.ExistsRoomTypeInHotel("hotelid", "Double").Should().BeTrue();
+        _hotelRepository.ExistsRoomTypeInHotel("hotelid", "Double").Returns(true);
+        var hotelService = new HotelService(_hotelRepository);
+        hotelService.ExistsRoomTypeInHotel("hotelid", "Double").ShouldBeTrue();
     }
     
     [Fact]
     public void ReturnFalseIfDoesNotExistRoomTypeInHotel()
     {
-        Mock<IHotelRepository> hotelRepository = new();
-        hotelRepository.Setup(hotelRepository => hotelRepository.ExistsRoomTypeInHotel("hotelid", "Double")).Returns(false);
-        var hotelService = new HotelService(hotelRepository.Object);
-        hotelService.ExistsRoomTypeInHotel("hotelid", "Double").Should().BeFalse();
+        _hotelRepository.ExistsRoomTypeInHotel("hotelid", "Double").Returns(false);
+        _hotelService.ExistsRoomTypeInHotel("hotelid", "Double").ShouldBeFalse();
     }
     
     [Fact]
     public void ReturnTheNumberOfExistingRoomOfTheTypeInHotel()
     {
-        Mock<IHotelRepository> hotelRepository = new();
-        hotelRepository.Setup(hotelRepository => hotelRepository.GetNumberOfRoomsByTypeAndHotel("hotelid", "Double")).Returns(1);
-        var hotelService = new HotelService(hotelRepository.Object);
-        hotelService.GetNumberOfRoomsByTypeAndHotel("hotelid", "Double").Should().Be(1);
+        _hotelRepository.GetNumberOfRoomsByTypeAndHotel("hotelid", "Double").Returns(1);
+        _hotelService.GetNumberOfRoomsByTypeAndHotel("hotelid", "Double").ShouldBe(1);
     }
 
 }

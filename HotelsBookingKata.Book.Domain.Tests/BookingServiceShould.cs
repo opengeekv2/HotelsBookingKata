@@ -1,8 +1,5 @@
-using Moq;
-
 namespace HotelsBookingKata.Book.Domain.Tests;
 
-using FluentAssertions;
 using NSubstitute;
 using Shouldly;
 
@@ -65,12 +62,12 @@ public class BookingServiceShould
         bookingDto.ShouldBeNull();
     }
 
-    /*
-     * començar en la data d'inici i acabar en de la data de fi
+    
+    /* començar en la data d'inici i acabar en de la data de fi
        començar abans de la data d'inici i acabar passat la data d'inici
            començar abans la data de fi i acabar passat la data de fi
      */
-    /* public static IEnumerable<object[]> Bookings => new List<object[]>
+    public static IEnumerable<object[]> Bookings => new List<object[]>
     {
         new object[] {
             new BookingDto("efeb449a-793a-4b30-9291-1f89f571d4d6", "95080440G", "37750641M", "Double",
@@ -91,19 +88,14 @@ public class BookingServiceShould
     [MemberData(nameof(Bookings))]
     public void FailToCreateBookingIfTheresNoFreeRoomOfTheTypeForTheDates(BookingDto inputBookingDto)
     {
-        Mock<IHotelService> hotelService = new();
-        hotelService.Setup(hotelService => hotelService.GetNumberOfRoomsByTypeAndHotel(inputBookingDto.HotelId, inputBookingDto.RoomType)).Returns(1);
-        Mock<IPolicyService> policyService = new();
-        policyService.Setup(policyService => policyService.IsBookingAllowed(inputBookingDto.EmployeeId, inputBookingDto.RoomType)).Returns(false);
-        Mock<IUniqueIdGenerator> uniqueIdGenerator = new();
-        Mock<IBookingRepository> bookingRepository = new();
-        bookingRepository.Setup(bookingRepository => bookingRepository.GetAll()).Returns([
+        _hotelService.GetNumberOfRoomsByTypeAndHotel(inputBookingDto.HotelId, inputBookingDto.RoomType).Returns(1);    
+        _bookingRepository.GetAll().Returns([
             new Booking("efeb449a-793a-4b30-9291-1f89f571d4d7", "95080440G", "37750641M", "Double", new DateTime(2024, 5, 26), new DateTime(2024, 5, 29))
         ]);
-        BookingService bookingService = new BookingService(uniqueIdGenerator.Object, hotelService.Object, bookingRepository.Object);
+        BookingService bookingService = new BookingService(_uniqueIdGenerator, _hotelService, _bookingRepository);
         
         var bookingResultDto = bookingService.Book(inputBookingDto.EmployeeId, inputBookingDto.HotelId, inputBookingDto.RoomType, inputBookingDto.CheckIn, inputBookingDto.CheckOut, out var bookingDto);
-        bookingResultDto.Should().BeOfType<NoFreeRoomDto>();
-        bookingDto.Should().BeNull();
-    }*/
+        bookingResultDto.ShouldBeOfType<NoFreeRoomDto>();
+        bookingDto.ShouldBeNull();
+    }
 }
