@@ -1,24 +1,29 @@
-using Moq;
+using NSubstitute;
 
 namespace HotelsBookingKata.Hotel.Domain.Tests;
 
 public class HotelServiceShould
 {
 
+    private readonly IHotelRepository _hotelRepository;
+    private readonly HotelService _hotelService;
+
+    public HotelServiceShould() {
+        _hotelRepository = Substitute.For<IHotelRepository>();
+        _hotelService = new HotelService(_hotelRepository);
+    }
+
     [Fact]
     public void AddAnHotel()
     {
         const string hotelId = "37750641M";
         const string hotelName = "Hotel 1";
-        Mock<IHotelRepository> hotelRepository = new (); 
-        var hotelService = new HotelService(hotelRepository.Object);
-        hotelRepository.Setup(_ => _.Add(It.Is<Hotel>(actualHotel =>
-            actualHotel.Id == hotelId && actualHotel.Name == hotelName
-        ))).Verifiable();
         
-        hotelService.AddHotel(hotelId, hotelName);
+        _hotelService.AddHotel(hotelId, hotelName);
 
-        hotelRepository.Verify();
+        _hotelRepository.Received().Add(Arg.Is<Hotel>(hotel =>
+            hotel.Id == hotelId && hotel.Name == hotelName
+        ));
     }
     
     [Fact]
@@ -28,15 +33,12 @@ public class HotelServiceShould
         const string hotelName = "Hotel 1";
         const int roomNumber = 101;
         const string roomType = "Double";
-        Mock<IHotelRepository> hotelRepository = new (); 
-        var hotelService = new HotelService(hotelRepository.Object);
-        hotelRepository.Setup(_ => _.Get(hotelId)).Returns(new Hotel(hotelId, hotelName));
-        hotelRepository.Setup(_ => _.Save(It.Is<Hotel>(actualHotel =>
-            actualHotel.Rooms.Any() && actualHotel.Rooms[0].Number == roomNumber && actualHotel.Rooms[0].Type == roomType
-        ))).Verifiable();
+        _hotelRepository.Get(hotelId).Returns(new Hotel(hotelId, hotelName));
         
-        hotelService.SetRoom(hotelId, roomNumber, roomType);
+        _hotelService.SetRoom(hotelId, roomNumber, roomType);
 
-        hotelRepository.Verify();
+        _hotelRepository.Received().Save(Arg.Is<Hotel>(hotel =>
+            hotel.Rooms.Any() && hotel.Rooms[0].Number == roomNumber && hotel.Rooms[0].Type == roomType
+        )); 
     }
 }
