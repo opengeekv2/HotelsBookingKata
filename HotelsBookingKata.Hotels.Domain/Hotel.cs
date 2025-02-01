@@ -1,4 +1,4 @@
-﻿namespace HotelsBookingKata.Hotels.Domain;
+﻿namespace HotelsBookingKata.Hotel.Domain;
 
 public class Hotel
 {

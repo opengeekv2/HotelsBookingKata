@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Domain", "HotelsBookingKata.Hotels.Domain\HotelsBookingKata.Hotels.Domain.csproj", "{7D75446C-A993-4BEF-81E7-C972305AAF02}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotel.Domain", "HotelsBookingKata.Hotels.Domain\HotelsBookingKata.Hotel.Domain.csproj", "{7D75446C-A993-4BEF-81E7-C972305AAF02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotels.Domain.Tests", "HotelsBookingKata.Hotels.Domain.Tests\HotelsBookingKata.Hotels.Domain.Tests.csproj", "{1B474487-CB6C-4B3B-9393-01881F8DF768}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotel.Domain.Tests", "HotelsBookingKata.Hotels.Domain.Tests\HotelsBookingKata.Hotel.Domain.Tests.csproj", "{1B474487-CB6C-4B3B-9393-01881F8DF768}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Specs", "HotelsBookingKata.Specs\HotelsBookingKata.Specs.csproj", "{98849974-BB78-45AF-9A59-3DAEAE2BA87E}"
 EndProject
@@ -22,8 +22,6 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7D75446C-A993-4BEF-81E7-C972305AAF02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -62,5 +60,8 @@ Global
 		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BDF9C49-A405-451F-8093-5A10CAF05228}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

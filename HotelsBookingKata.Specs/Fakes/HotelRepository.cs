@@ -1,4 +1,4 @@
-namespace HotelsBookingKata.Hotels.Domain.Specs.Fakes;
+namespace HotelsBookingKata.Hotel.Domain.Specs.Fakes;
 
 public class HotelRepository : IHotelRepository, Book.Domain.IHotelRepository
 {

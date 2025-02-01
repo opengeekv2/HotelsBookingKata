@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+        <PackageReference Include="Shouldly" Version="4.3.0" />
         <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.9.57" />
         <PackageReference Include="SpecFlow.xUnit" Version="3.9.22" />
         <PackageReference Include="xunit" Version="2.4.1" />
@@ -25,9 +26,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="../HotelsBookingKata.Hotels.Domain/HotelsBookingKata.Hotel.Domain.csproj" />
         <ProjectReference Include="..\HotelsBookingKata.Book.Domain\HotelsBookingKata.Book.Domain.csproj" />
         <ProjectReference Include="..\HotelsBookingKata.Company.Domain\HotelsBookingKata.Company.Domain.csproj" />
-        <ProjectReference Include="..\HotelsBookingKata.Hotels.Domain\HotelsBookingKata.Hotels.Domain.csproj" />
     </ItemGroup>
 
 </Project>

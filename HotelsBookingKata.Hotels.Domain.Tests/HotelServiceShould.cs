@@ -1,6 +1,6 @@
 using Moq;
 
-namespace HotelsBookingKata.Hotels.Domain.Tests;
+namespace HotelsBookingKata.Hotel.Domain.Tests;
 
 public class HotelServiceShould
 {
