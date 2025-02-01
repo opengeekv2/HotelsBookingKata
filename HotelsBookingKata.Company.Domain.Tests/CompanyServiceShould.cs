@@ -1,42 +1,43 @@
-using Moq;
+using NSubstitute;
 
 namespace HotelsBookingKata.Company.Domain.Tests;
 
 public class CompanyServiceShould
 {
+    private readonly IEmployeeRepository _employeeRepository;
+    private readonly ICompanyRepository _companyRepository;
+    private readonly CompanyService _companyService;
+    public CompanyServiceShould() {
+        _employeeRepository = Substitute.For<IEmployeeRepository>();
+        _companyRepository = Substitute.For<ICompanyRepository>();
+        _companyService = new CompanyService(_companyRepository, _employeeRepository);
+    }
+
     [Fact]
     public void CreateACompany()
     {
-        Mock<ICompanyRepository> companyRepository = new();
-        Mock<IEmployeeRepository> employeeRepository = new();
-        var companyService = new CompanyService(companyRepository.Object, employeeRepository.Object);
+        var companyService = new CompanyService(_companyRepository, _employeeRepository);
         var companyId = "59500657W";
         var expectedCompany = new Company(companyId);
-        companyRepository.Setup(m =>m.Add(It.Is<Company>(company =>
-            company.Id == expectedCompany.Id))).Verifiable();
         
         companyService.AddCompany(companyId);
-        
-        companyRepository.Verify();
+
+        _companyRepository.Received().Add(Arg.Is<Company>(company => company.Id == companyId));
     }
     
     [Fact]
     public void CreateAnEmployee()
     {
-        Mock<ICompanyRepository> companyRepository = new();
-        Mock<IEmployeeRepository> employeeRepository = new();
-        var companyService = new CompanyService(companyRepository.Object, employeeRepository.Object);
+        var companyService = new CompanyService(_companyRepository, _employeeRepository);
         var companyId = "59500657W";
         var employeeId = "95080440G";
-        var company = new Company("59500657W");
+        var company = new Company(companyId);
         var expectedEmployee = new Employee(employeeId, company);
         
-        companyRepository.Setup(_ => _.GetCompany("59500657W")).Returns(new Company("59500657W"));
-        employeeRepository.Setup(m =>m.Add(It.Is<Employee>(employee =>
-            employee.EmployeeId == expectedEmployee.EmployeeId && employee.Company.Id == expectedEmployee.Company.Id))).Verifiable();
+        _companyRepository.GetCompany(companyId).Returns(new Company("59500657W"));
         
         companyService.AddEmployee(companyId, employeeId);
         
-        employeeRepository.Verify();
+        _employeeRepository.Received().Add(Arg.Is<Employee>(employee => employee.Id == employeeId));       
     }
 }

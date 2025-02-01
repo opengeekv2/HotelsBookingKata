@@ -2,12 +2,12 @@ namespace HotelsBookingKata.Company.Domain;
 
 public class Employee
 {
-    public string EmployeeId { get; }
+    public string Id { get; }
     public Company Company { get; }
 
-    public Employee(string employeeId, Company company)
+    public Employee(string id, Company company)
     {
-        EmployeeId = employeeId;
+        Id = id;
         Company = company;
     }
 }
