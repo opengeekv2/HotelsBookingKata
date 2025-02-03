@@ -8,12 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Using Include="TechTalk.SpecFlow" />
+        <Using Include="Reqnroll" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
-        <PackageReference Include="Reqnroll.SpecFlowCompatibility" Version="2.2.1" />
         <PackageReference Include="Reqnroll.xUnit" Version="2.2.1" />
         <PackageReference Include="Shouldly" Version="4.3.0" />
         <PackageReference Include="xunit" Version="2.4.2" />
@@ -21,7 +20,6 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="FluentAssertions" Version="6.2.0" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="9.8.0.76515" PrivateAssets="all" Condition="$(MSBuildProjectExtension) == '.csproj'" />
     </ItemGroup>
 
