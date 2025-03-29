@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace HotelsBookingKata.Hotels.Infrastructure.API.Tests;
 
-public class ApiTests(WebApplicationFactory<Program> factory) 
+public class ApiTests(WebApplicationFactory<Program> factory)
     : IClassFixture<WebApplicationFactory<Program>>
 {
     [Fact]

@@ -1,9 +1,10 @@
 using HotelsBookingKata.Company.Domain;
 
 namespace HotelsBookingKata.Hotels.Domain.Specs.Fakes;
+
 public class CompanyRepository : ICompanyRepository
 {
-    private readonly List<Company.Domain.Company> _companies = new ();
+    private readonly List<Company.Domain.Company> _companies = new();
 
     public void Add(Company.Domain.Company company)
     {

@@ -4,8 +4,5 @@ namespace HotelsBookingKata.Hotels.Domain.Specs.Fakes;
 
 public class EmployeeRepository : IEmployeeRepository
 {
-    public void Add(Employee employee)
-    {
-        
-    }
+    public void Add(Employee employee) { }
 }

@@ -2,7 +2,8 @@ namespace HotelsBookingKata.Hotel.Domain.Specs.Fakes;
 
 public class HotelRepository : IHotelRepository, Book.Domain.IHotelRepository
 {
-    private readonly List<Hotel> _hotels = new ();
+    private readonly List<Hotel> _hotels = new();
+
     public void Add(Hotel hotel)
     {
         _hotels.Add(hotel);

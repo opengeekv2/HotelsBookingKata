@@ -13,13 +13,13 @@ public sealed class HotelsBooking
     private readonly ScenarioContext _scenarioContext;
 
     private readonly Hotel.Domain.IHotelRepository _hotelRepository;
-    
+
     private readonly ICompanyRepository _companyRepository;
-    
+
     private readonly IEmployeeRepository _employeeRepository;
-    
+
     private BookingOperationResultDto _bookingOperationResultDto;
-    
+
     private BookingDto? _bookingDto;
 
     public HotelsBooking(ScenarioContext scenarioContext)
@@ -30,7 +30,6 @@ public sealed class HotelsBooking
         _employeeRepository = new EmployeeRepository();
     }
 
-
     [Given(@"an hotel with id ""(.*)"" and name ""(.*)""")]
     public void GivenAnHotelWithIdAndName(string hotelId, string hotelName)
     {
@@ -39,7 +38,11 @@ public sealed class HotelsBooking
     }
 
     [Given(@"a room for hotel with id ""(.*)"", number (.*) and room type ""(.*)""")]
-    public void GivenARoomForHotelWithNumberAndRoomType(string hotelId, int roomNumber, string roomType)
+    public void GivenARoomForHotelWithNumberAndRoomType(
+        string hotelId,
+        int roomNumber,
+        string roomType
+    )
     {
         var hotelService = new Hotel.Domain.HotelService(_hotelRepository);
         hotelService.SetRoom(hotelId, roomNumber, roomType);
@@ -53,18 +56,43 @@ public sealed class HotelsBooking
         companyService.AddEmployee(companyId, employeeId);
     }
 
-    [When(@"the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
-    public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId,
-        DateTime checkIn, DateTime checkOut)
+    [When(
+        @"the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)"""
+    )]
+    public void WhenTheEmployeeBooksTheRoomTypeOnHotelFromTo(
+        string employeeId,
+        string roomType,
+        string hotelId,
+        DateTime checkIn,
+        DateTime checkOut
+    )
     {
         var uniqueIdGenerator = new UniqueIdGenerator();
-        var bookingService = new BookingService(uniqueIdGenerator, new Book.Domain.HotelService(new HotelRepository()), new BookingRepository());
-        _bookingOperationResultDto =
-            bookingService.Book(employeeId, hotelId, roomType, checkIn, checkOut, out _bookingDto);
+        var bookingService = new BookingService(
+            uniqueIdGenerator,
+            new Book.Domain.HotelService(new HotelRepository()),
+            new BookingRepository()
+        );
+        _bookingOperationResultDto = bookingService.Book(
+            employeeId,
+            hotelId,
+            roomType,
+            checkIn,
+            checkOut,
+            out _bookingDto
+        );
     }
 
-    [Then(@"the result should complete a booking and return confirmation for the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)""")]
-    public void ThenTheResultShouldCompleteABookingAndReturnConfirmationForTheEmployeeBooksTheRoomTypeOnHotelFromTo(string employeeId, string roomType, string hotelId, string startDate, string endDate)
+    [Then(
+        @"the result should complete a booking and return confirmation for the employee ""(.*)"" books the room type ""(.*)"" on hotel ""(.*)"" from ""(.*)"" to ""(.*)"""
+    )]
+    public void ThenTheResultShouldCompleteABookingAndReturnConfirmationForTheEmployeeBooksTheRoomTypeOnHotelFromTo(
+        string employeeId,
+        string roomType,
+        string hotelId,
+        string startDate,
+        string endDate
+    )
     {
         _bookingOperationResultDto.ShouldBeOfType<BookingSuccessfulDto>();
         _bookingDto.EmployeeId.ShouldBe(employeeId);

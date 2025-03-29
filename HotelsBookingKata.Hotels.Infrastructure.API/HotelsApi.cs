@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Routing;
 
 public static class HotelsApi
 {
-    public static void UseHotelsApi(this IEndpointRouteBuilder endpointRouteBuilder) {
+    public static void UseHotelsApi(this IEndpointRouteBuilder endpointRouteBuilder)
+    {
         endpointRouteBuilder.MapGet("/hotels", () => Results.Ok());
     }
-    
 }

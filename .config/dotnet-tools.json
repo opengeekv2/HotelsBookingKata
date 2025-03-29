@@ -2,10 +2,17 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "dotnet-stryker": {
-      "version": "4.2.0",
+    "csharpier": {
+      "version": "0.30.6",
       "commands": [
-        "dotnet-stryker"
+        "dotnet-csharpier"
+      ],
+      "rollForward": false
+    },
+    "husky": {
+      "version": "0.7.2",
+      "commands": [
+        "husky"
       ],
       "rollForward": false
     }

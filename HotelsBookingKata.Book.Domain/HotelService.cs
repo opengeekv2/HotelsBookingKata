@@ -13,7 +13,7 @@ public class HotelService(IHotelRepository hotelRepository) : IHotelService
     {
         return hotelRepository.ExistsRoomTypeInHotel(hotelId, roomType);
     }
-    
+
     public int GetNumberOfRoomsByTypeAndHotel(string hotelId, string roomType)
     {
         return hotelRepository.GetNumberOfRoomsByTypeAndHotel(hotelId, roomType);
