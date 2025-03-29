@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Company.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Company.Infrastructure.API", "HotelsBookingKata.Company.Infrastructure.API\HotelsBookingKata.Company.Infrastructure.API.csproj", "{5AED161F-A551-4485-B6A2-7285832A6B11}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Book.Infrastructure.Boot", "HotelsBookingKata.Book.Infrastructure.Boot\HotelsBookingKata.Book.Infrastructure.Boot.csproj", "{FB53012A-D235-41BB-8002-F5D6525CFE5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Book.Infrastructure.API", "HotelsBookingKata.Book.Infrastructure.API\HotelsBookingKata.Book.Infrastructure.API.csproj", "{6B728511-002E-4335-ADDA-476C8DEE5EA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +83,14 @@ Global
 		{5AED161F-A551-4485-B6A2-7285832A6B11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AED161F-A551-4485-B6A2-7285832A6B11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AED161F-A551-4485-B6A2-7285832A6B11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB53012A-D235-41BB-8002-F5D6525CFE5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB53012A-D235-41BB-8002-F5D6525CFE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB53012A-D235-41BB-8002-F5D6525CFE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB53012A-D235-41BB-8002-F5D6525CFE5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
