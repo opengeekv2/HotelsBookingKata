@@ -4,5 +4,11 @@
        "command": "dotnet",
        "args": [ "csharpier", "${staged}" ],
        "include": [ "**/**/*.cs" ]
-   }]
+   },
+   {
+      "name": "Run test",
+      "command": "dotnet",
+      "args": [ "test" ]
+  }
+]
 }
