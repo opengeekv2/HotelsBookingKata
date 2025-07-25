@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="../HotelsBookingKata.Company.Infrastructure.API/HotelsBookingKata.Company.Infrastructure.API.csproj" />
+    <ProjectReference Include="..\HotelsBookingKata.ServiceDefaults\HotelsBookingKata.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

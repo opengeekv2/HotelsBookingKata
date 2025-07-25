@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotel.Domain", "HotelsBookingKata.Hotels.Domain\HotelsBookingKata.Hotel.Domain.csproj", "{7D75446C-A993-4BEF-81E7-C972305AAF02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Hotel.Domain.Tests", "HotelsBookingKata.Hotels.Domain.Tests\HotelsBookingKata.Hotel.Domain.Tests.csproj", "{1B474487-CB6C-4B3B-9393-01881F8DF768}"
@@ -28,6 +28,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Book.Infrastructure.Boot", "HotelsBookingKata.Book.Infrastructure.Boot\HotelsBookingKata.Book.Infrastructure.Boot.csproj", "{FB53012A-D235-41BB-8002-F5D6525CFE5F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.Book.Infrastructure.API", "HotelsBookingKata.Book.Infrastructure.API\HotelsBookingKata.Book.Infrastructure.API.csproj", "{6B728511-002E-4335-ADDA-476C8DEE5EA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata", "HotelsBookingKata\HotelsBookingKata.csproj", "{46F8734B-1A41-4EE4-9F7B-A10DCFF21EE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelsBookingKata.ServiceDefaults", "HotelsBookingKata.ServiceDefaults\HotelsBookingKata.ServiceDefaults.csproj", "{1FAC491D-D922-428D-9ECF-C2DA11CF0F37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +95,14 @@ Global
 		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B728511-002E-4335-ADDA-476C8DEE5EA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46F8734B-1A41-4EE4-9F7B-A10DCFF21EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46F8734B-1A41-4EE4-9F7B-A10DCFF21EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46F8734B-1A41-4EE4-9F7B-A10DCFF21EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46F8734B-1A41-4EE4-9F7B-A10DCFF21EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FAC491D-D922-428D-9ECF-C2DA11CF0F37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAC491D-D922-428D-9ECF-C2DA11CF0F37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAC491D-D922-428D-9ECF-C2DA11CF0F37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAC491D-D922-428D-9ECF-C2DA11CF0F37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
