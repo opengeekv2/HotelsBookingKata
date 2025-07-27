@@ -14,5 +14,9 @@
         <InternalsVisibleTo Include="HotelsBookingKata.Hotels.Infrastructure.API.Tests" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="../HotelsBookingKata.Hotels.Domain/HotelsBookingKata.Hotel.Domain.csproj" />
+    </ItemGroup>
+
 
 </Project>
