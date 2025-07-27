@@ -3,10 +3,10 @@
 {
     "name": ".NET Aspire",
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-    "image": "mcr.microsoft.com/devcontainers/dotnet:9.0-bookworm",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0-bookworm",
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-        "ghcr.io/devcontainers/features/powershell:1": {},
+        "ghcr.io/devcontainers/features/powershell:1": {}
     },
 
     "hostRequirements": {
@@ -25,7 +25,7 @@
 
     // Use 'postCreateCommand' to run commands after the container is created.
     // "postCreateCommand": "dotnet restore",
-    "onCreateCommand": "dotnet new install Aspire.ProjectTemplates::9.3.1 --force",
+    "onCreateCommand": "dotnet new install Aspire.ProjectTemplates::8.2.2 --force",
     "postStartCommand": "dotnet dev-certs https --trust",
     "customizations": {
         "vscode": {
