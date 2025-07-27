@@ -1,7 +1,12 @@
-﻿using HotelsBookingKata.Book.Domain;
+﻿using System.Text.Json;
+using Aspire.Hosting;
+using Aspire.Hosting.Testing;
+using HotelsBookingKata.Book.Domain;
 using HotelsBookingKata.Company.Domain;
 using HotelsBookingKata.Hotel.Domain.Specs.Fakes;
 using HotelsBookingKata.Hotels.Domain.Specs.Fakes;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.VisualBasic;
 using Shouldly;
 
 namespace HotelsBookingKata.Hotels.Domain.Specs.Steps;
@@ -22,6 +27,8 @@ public sealed class HotelsBooking
 
     private BookingDto? _bookingDto;
 
+    private HttpClient _hotelsHttpClient;
+
     public HotelsBooking(ScenarioContext scenarioContext)
     {
         _scenarioContext = scenarioContext;
@@ -30,22 +37,57 @@ public sealed class HotelsBooking
         _employeeRepository = new EmployeeRepository();
     }
 
-    [Given(@"an hotel with id ""(.*)"" and name ""(.*)""")]
-    public void GivenAnHotelWithIdAndName(string hotelId, string hotelName)
+    [BeforeScenario]
+    public async Task SetupApplication()
     {
-        var hotelService = new Hotel.Domain.HotelService(_hotelRepository);
-        hotelService.AddHotel(hotelId, hotelName);
+        var builder = await DistributedApplicationTestingBuilder.CreateAsync<Projects.HotelsBookingKata>();
+        builder.Services.ConfigureHttpClientDefaults(clientBuilder =>
+        {
+            clientBuilder.AddStandardResilienceHandler();
+        });
+        var app = await builder.BuildAsync();
+
+        await app.StartAsync();
+
+        _hotelsHttpClient = app.CreateHttpClient("hotels");
+        using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+        await app.ResourceNotifications.WaitForResourceHealthyAsync("hotels", cts.Token);
+    }
+
+    [Given(@"an hotel with id ""(.*)"" and name ""(.*)""")]
+    public async Task GivenAnHotelWithIdAndName(string hotelId, string hotelName)
+    {
+        var result = await _hotelsHttpClient.PostAsync(
+            $"/hotels",
+            new StringContent(
+                JsonSerializer.Serialize(new
+                {
+                    id = hotelId,
+                    name = hotelName
+                }
+            ), System.Text.Encoding.UTF8, "application/json")
+        );
+        result.EnsureSuccessStatusCode();
     }
 
     [Given(@"a room for hotel with id ""(.*)"", number (.*) and room type ""(.*)""")]
-    public void GivenARoomForHotelWithNumberAndRoomType(
+    public async Task GivenARoomForHotelWithNumberAndRoomType(
         string hotelId,
         int roomNumber,
         string roomType
     )
     {
-        var hotelService = new Hotel.Domain.HotelService(_hotelRepository);
-        hotelService.SetRoom(hotelId, roomNumber, roomType);
+        var result = await _hotelsHttpClient.PostAsync(
+            $"/hotels/{hotelId}/rooms",
+            new StringContent(
+                JsonSerializer.Serialize(new
+                {
+                    number = roomNumber,
+                    type = roomType
+                }
+            ), System.Text.Encoding.UTF8, "application/json")
+        );
+        result.EnsureSuccessStatusCode();
     }
 
     [Given(@"an employee of company ""(.*)"", and employee id ""(.*)""")]
