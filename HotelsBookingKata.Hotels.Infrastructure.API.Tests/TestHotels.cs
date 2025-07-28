@@ -1,18 +1,51 @@
+using System.ComponentModel;
+using System.Data.Common;
 using System.Net.Http.Json;
 using System.Text.Json;
+using HotelsBookingKata.Hotels.Infrastructure.DB;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Npgsql;
 using Shouldly;
+using Testcontainers.PostgreSql;
 
 namespace HotelsBookingKata.Hotels.Infrastructure.API.Tests;
 
-public class TestHotels(WebApplicationFactory<Program> factory)
+public class TestHotels
     : IClassFixture<WebApplicationFactory<Program>>
 {
+    private readonly WebApplicationFactory<Program> _factory;
+
+    public TestHotels(WebApplicationFactory<Program> factory)
+    {
+        var postgreSqlContainer = new PostgreSqlBuilder().Build();
+        postgreSqlContainer.StartAsync().GetAwaiter().GetResult();
+        factory.WithWebHostBuilder(builder =>
+        {
+            builder.ConfigureServices(services =>
+            {
+                services.AddSingleton<DbConnection>(sp =>
+                {
+                    var connectionString = postgreSqlContainer.GetConnectionString();
+                    var dbConnection = new NpgsqlConnection(connectionString);
+                    dbConnection.Open();
+                    return dbConnection;
+                });
+                services.AddDbContext<HotelsContext>((container, options) =>
+                {
+                    options.UseNpgsql(container.GetRequiredService<DbConnection>());
+                });
+            });
+        });
+        _factory = factory;
+    }
+
     [Fact]
     public async Task TestGetHotels()
     {
         // Arrange
-        var client = factory.CreateClient();
+        var client = _factory.CreateClient();
 
         // Act
         var response = await client.GetAsync("/hotels");
@@ -25,7 +58,7 @@ public class TestHotels(WebApplicationFactory<Program> factory)
     public async Task TestPostHotel()
     {
         // Arrange
-        var client = factory.CreateClient();
+        var client = _factory.CreateClient();
 
         // Act
         var postResponse = await client.PostAsync("/hotels", new StringContent(

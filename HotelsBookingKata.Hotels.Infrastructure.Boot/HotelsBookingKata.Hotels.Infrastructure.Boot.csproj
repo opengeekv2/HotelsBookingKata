@@ -10,6 +10,7 @@
     <ItemGroup>
       <ProjectReference Include="../HotelsBookingKata.Hotels.Domain/HotelsBookingKata.Hotel.Domain.csproj" />
       <ProjectReference Include="../HotelsBookingKata.Hotels.Infrastructure.API/HotelsBookingKata.Hotels.Infrastructure.API.csproj" />
+      <ProjectReference Include="../HotelsBookingKata.Hotels.Infrastructure.DB/HotelsBookingKata.Hotels.Infrastructure.DB.csproj" />
       <ProjectReference Include="..\HotelsBookingKata.ServiceDefaults\HotelsBookingKata.ServiceDefaults.csproj" />
     </ItemGroup>
 

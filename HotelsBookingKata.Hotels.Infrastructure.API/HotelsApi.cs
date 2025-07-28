@@ -15,8 +15,7 @@ public static class HotelsApi
         endpointRouteBuilder.MapGet("/hotels/{id}", (string id) => Results.Ok(new HotelDto(id, "a hotel name")));
         endpointRouteBuilder.MapPost("/hotels", (string id, HotelDto hotelDto, HotelService hotelService) => {
             hotelService.AddHotel(id, hotelDto.Name);
-            var newHotelDto = hotelService.GetHotel(id);
-            return Results.Ok(newHotelDto);
+            return Results.Ok();
         });
     }
 }

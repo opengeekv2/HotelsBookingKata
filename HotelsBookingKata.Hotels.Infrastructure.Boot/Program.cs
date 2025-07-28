@@ -1,9 +1,11 @@
 using HotelsBookingKata.Hotel.Domain;
 using HotelsBookingKata.Hotels.Infrastructure.API;
+using HotelsBookingKata.Hotels.Infrastructure.DB;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
-builder.Services.AddSingleton<HotelService>();
+builder.AddDb();
+builder.Services.AddScoped<HotelService>();
 var app = builder.Build();
 
 app.UseHotelsApi();
